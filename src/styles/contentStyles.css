@@ -1,5 +1,8 @@
 .search-container {
     padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .search-input {
@@ -63,11 +66,11 @@
 }
 
 .help-content div:first-child {
-    margin-right: 5px;
+    margin-right: 5px; /* Adjust spacing as needed */
 }
 
 .help-question-mark {
-    padding: 0 10px;
+    padding: 0 10px; /* Add padding to the left and right of the "?" */
 }
 
 #help-container:hover {
@@ -175,6 +178,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text to the left */
+    padding-left: 10px; /* Add some padding to the left */
+}
+
+.cell input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.changed-field {
+    background-color: #e0f7fa; /* Very light grey-blue color */
 }
 
 .my-table .-previous button,
@@ -198,37 +221,27 @@
     cursor: not-allowed;
 }
 
-.changed-field {
-    background-color: #ffeb3b;
-  }
-
-.search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .cancel-button, .save-button {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .cancel-button:hover, .save-button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }

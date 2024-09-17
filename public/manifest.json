@@ -11,7 +11,7 @@
       {
         "matches": ["https://*.lightning.force.com/*"],
         "js": ["contentScript.js"],
-        "css": ["assets/contentScript-D3SOn5V1.css"]
+        "css": ["assets/contentScript-VtRSRhvZ.css"]
       }
     ],
     "icons": {

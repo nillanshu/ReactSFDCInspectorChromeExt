@@ -89,7 +89,7 @@ export default function SearchBar({ keyFields, accessToken }) {
     {
       name: 'Field Value',
       selector: (row, index) => (
-        <div className="cell" title={row.fieldValue} onDoubleClick={() => setEditingRowIndex(index)}>
+        <div className={`cell ${changes[row.fieldName] ? 'changed-field' : ''}`} title={row.fieldValue} onDoubleClick={() => setEditingRowIndex(index)}>
           {editingRowIndex === index ? (
             <input
               type="text"
@@ -97,14 +97,13 @@ export default function SearchBar({ keyFields, accessToken }) {
               onChange={(e) => handleFieldChange(index, row.fieldName, e.target.value)}
               onBlur={() => setEditingRowIndex(null)}
               autoFocus
-              className={changes[row.fieldName] ? 'changed-field' : ''}
             />
           ) : isSalesforceId(row.fieldValue) ? (
             <a href={`/${row.fieldValue}`} target="_blank" rel="noopener noreferrer" title={row.fieldValue}>
               {row.fieldValue}
             </a>
           ) : (
-            <span className={changes[row.fieldName] ? 'changed-field' : ''}>{row.fieldValue}</span>
+            <span>{row.fieldValue}</span>
           )}
         </div>
       ),
