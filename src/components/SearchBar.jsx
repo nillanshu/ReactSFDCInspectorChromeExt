@@ -51,6 +51,7 @@ export default function SearchBar({ keyFields, accessToken }) {
       const response = await updateRecordFields(instanceUrl, recordId, objectApiName, changes, accessToken);
       if (response.status === 204) {
         alert('Fields updated successfully');
+        setChanges({});
       } else {
         alert('Error updating fields');
       }
@@ -63,6 +64,15 @@ export default function SearchBar({ keyFields, accessToken }) {
   const isSalesforceId = (value) => {
     const regex = /^[a-zA-Z0-9]{15,18}$/;
     return regex.test(value);
+  };
+
+  const hasChanges = () => {
+    return Object.keys(changes).length > 0;
+  };
+
+  const cancelChanges = () => {
+    setFields(keyFields);
+    setChanges({}); 
   };
 
   const columns = [
@@ -117,7 +127,12 @@ export default function SearchBar({ keyFields, accessToken }) {
           className="my-table"
         />
       </div>
-      <button onClick={updateFieldsInSalesforce} className="update-button">Update Fields</button>
+      {hasChanges() && (
+        <div className="button-container">
+          <button onClick={cancelChanges} className="cancel-button">Cancel</button>
+          <button onClick={updateFieldsInSalesforce} className="save-button">Save</button>
+        </div>
+      )}
     </div>
   );
 }
