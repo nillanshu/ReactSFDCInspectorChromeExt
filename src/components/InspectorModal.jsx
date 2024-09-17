@@ -19,8 +19,11 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
   return (
     <div>
       <div id="help-container" onClick={() => setModalVisible(!modalVisible)}>
-        <div className="help-content">Need Help ?</div>
-      </div>
+        <div className="help-content">
+            <div>Need Help</div>
+            <div className="help-question-mark">?</div>
+        </div>
+    </div>
       {modalVisible && (
         <div id="modal" className="fixed-left">
           <div className="fixed-left-content">

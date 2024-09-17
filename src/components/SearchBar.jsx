@@ -89,7 +89,7 @@ export default function SearchBar({ keyFields, accessToken }) {
     {
       name: 'Field Value',
       selector: (row, index) => (
-        <div className="cell" onDoubleClick={() => setEditingRowIndex(index)}>
+        <div className="cell" title={row.fieldValue} onDoubleClick={() => setEditingRowIndex(index)}>
           {editingRowIndex === index ? (
             <input
               type="text"
