@@ -36,15 +36,15 @@
     height: 0; /* Safari and Chrome */
 }
 
-.help-container {
+#help-container {
     position: fixed;
-    top: 60%;
-    left: -75px;
+    top: 45%;
+    left: -72px;
     transform: translateY(-50%);
     transition: left 0.3s;
     cursor: pointer;
     z-index: 9999;
-    height: 20rem;
+    height: 40px;
     width: auto; 
     background-color: #007bff; 
     display: flex;
@@ -58,14 +58,19 @@
 .help-content {
     color: white;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .help-content div:first-child {
-    margin-right: 10px;
-    white-space: nowrap;
+    margin-right: 5px;
 }
 
-.help-container:hover {
+.help-question-mark {
+    padding: 0 10px;
+}
+
+#help-container:hover {
     left: 0;
 }
 

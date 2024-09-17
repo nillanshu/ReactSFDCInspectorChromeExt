@@ -5,6 +5,7 @@ import { updateRecordFields } from '../api/updateFields';
 export default function SearchBar({ keyFields, accessToken }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [fields, setFields] = useState([]);
+  const [initialFields, setInitialFields] = useState([]);
   const [changes, setChanges] = useState({});
   const [objectApiName, setObjectApiName] = useState('');
   const [recordId, setRecordId] = useState('');
@@ -24,6 +25,7 @@ export default function SearchBar({ keyFields, accessToken }) {
     );
 
     setFields(keyFields);
+    setInitialFields(JSON.parse(JSON.stringify(keyFields)));
   }, [keyFields]);
 
   const filteredFields = fields.filter(
@@ -52,6 +54,7 @@ export default function SearchBar({ keyFields, accessToken }) {
       if (response.status === 204) {
         alert('Fields updated successfully');
         setChanges({});
+        setInitialFields(JSON.parse(JSON.stringify(fields)));
       } else {
         alert('Error updating fields');
       }
@@ -71,8 +74,8 @@ export default function SearchBar({ keyFields, accessToken }) {
   };
 
   const cancelChanges = () => {
-    setFields(keyFields);
-    setChanges({}); 
+    setFields(JSON.parse(JSON.stringify(initialFields)));
+    setChanges({});
   };
 
   const columns = [
@@ -86,7 +89,7 @@ export default function SearchBar({ keyFields, accessToken }) {
     {
       name: 'Field Value',
       selector: (row, index) => (
-        <div className="cell" onDoubleClick={() => setEditingRowIndex(index)}>
+        <div className="cell" title={row.fieldValue} onDoubleClick={() => setEditingRowIndex(index)}>
           {editingRowIndex === index ? (
             <input
               type="text"
