@@ -1,0 +1,198 @@
+.search-container {
+    padding: 0.5rem 0;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.875rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.datatable-container {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.datatable-container::-webkit-scrollbar {
+    width: 0; /* Safari and Chrome */
+    height: 0; /* Safari and Chrome */
+}
+
+.help-container {
+    position: fixed;
+    top: 60%;
+    left: -75px;
+    transform: translateY(-50%);
+    transition: left 0.3s;
+    cursor: pointer;
+    z-index: 9999;
+    height: 20rem;
+    width: auto; 
+    background-color: #007bff; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.help-content {
+    color: white;
+    white-space: nowrap;
+}
+
+.help-content div:first-child {
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.help-container:hover {
+    left: 0;
+}
+
+.slds-modal__container {
+    width: 75%;
+    max-width: 65rem;
+}
+
+.fixed-left {
+    position: fixed;
+    top: 50%;
+    left: -10px;
+    width: 420px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 99999;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 11px;
+    padding: 0;
+}
+
+.fixed-left-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ddd;
+    background-color: #e6f0fa;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.fixed-left-close {
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.fixed-left-content {
+    padding: 0.5rem 1rem;
+}
+
+#datatable-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#datatable-container th, #datatable-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 50%;
+}
+
+#datatable-container th {
+    background-color: #e6f0fa;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.my-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.my-table .rdt_TableCol {
+    background-color: #c1c6f9;
+    color: white;
+    font-size: 0.9rem;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.my-table .rdt_TableRow {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 0.8rem;
+    font-style: normal;
+}
+
+.my-table .rdt_TableRow:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.my-table .rdt_TableRow:hover {
+    background-color: #ddd;
+}
+
+.my-table .rdt_TableCell {
+    padding: 12px 15px;
+}
+
+.my-table .clickable {
+    cursor: pointer;
+}
+
+.cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.my-table .-previous button,
+.my-table .-next button {
+    background-color: #6777EF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.my-table .-previous button:hover,
+.my-table .-next button:hover {
+    background-color: #4B5FD3;
+}
+
+.my-table .-previous button:disabled,
+.my-table .-next button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.changed-field {
+    background-color: #ffeb3b;
+  }
