@@ -18,8 +18,8 @@
 }
 
 .search-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+    border-color: #F38117;
+    box-shadow: 0 2px 8px rgba(243, 129, 23, 0.25);
     outline: none;
 }
 
@@ -49,7 +49,7 @@
     z-index: 9999;
     height: 40px;
     width: auto; 
-    background-color: #007bff; 
+    background-color: #F38117; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,7 +84,7 @@
 
 .fixed-left {
     position: fixed;
-    top: 50%;
+    top: 48%;
     left: -10px;
     width: 420px;
     background-color: white;
@@ -103,7 +103,7 @@
     align-items: center;
     padding: 0.5rem 1rem;
     border-bottom: 1px solid #ddd;
-    background-color: #e6f0fa;
+    background-color: #FCE5D0; /* Light orange */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -130,7 +130,7 @@
 }
 
 #datatable-container th {
-    background-color: #e6f0fa;
+    background-color: #FCE5D0; /* Light orange */
     position: sticky;
     top: 0;
     z-index: 1;
@@ -143,7 +143,7 @@
 }
 
 .my-table .rdt_TableCol {
-    background-color: #c1c6f9;
+    background-color: #F38117;
     color: white;
     font-size: 0.9rem;
     font-style: italic;
@@ -158,11 +158,11 @@
 }
 
 .my-table .rdt_TableRow:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #FCE5D0; /* Light orange */
 }
 
 .my-table .rdt_TableRow:hover {
-    background-color: #ddd;
+    background-color: #FAD4B0; /* Slightly darker light orange */
 }
 
 .my-table .rdt_TableCell {
@@ -197,12 +197,12 @@
 }
 
 .changed-field {
-    background-color: #e0f7fa; /* Very light grey-blue color */
+    background-color: #FCE5D0; /* Light orange */
 }
 
 .my-table .-previous button,
 .my-table .-next button {
-    background-color: #6777EF;
+    background-color: #F38117;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -212,7 +212,7 @@
 
 .my-table .-previous button:hover,
 .my-table .-next button:hover {
-    background-color: #4B5FD3;
+    background-color: #D96B0C;
 }
 
 .my-table .-previous button:disabled,
@@ -228,7 +228,7 @@
 }
 
 .cancel-button, .save-button {
-    background-color: #007bff;
+    background-color: #F38117;
     border: none;
     color: white;
     padding: 5px 10px;
@@ -243,5 +243,5 @@
 }
 
 .cancel-button:hover, .save-button:hover {
-    background-color: #0056b3;
+    background-color: #D96B0C;
 }

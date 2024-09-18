@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { updateRecordFields } from '../api/updateFields';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SearchBar({ keyFields, accessToken }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,22 +47,22 @@ export default function SearchBar({ keyFields, accessToken }) {
 
   const updateFieldsInSalesforce = async () => {
     if (!recordId) {
-      alert('Record ID is not defined');
+      toast.error('Record ID is not defined');
       return;
     }
 
     try {
       const response = await updateRecordFields(instanceUrl, recordId, objectApiName, changes, accessToken);
       if (response.status === 204) {
-        alert('Fields updated successfully');
+        toast.success('Fields updated successfully');
         setChanges({});
         setInitialFields(JSON.parse(JSON.stringify(fields)));
       } else {
-        alert('Error updating fields');
+        toast.error('Error updating fields');
       }
     } catch (error) {
       console.error('Error updating fields:', error);
-      alert('Error updating fields');
+      toast.error('Error updating fields');
     }
   };
 
@@ -135,6 +137,7 @@ export default function SearchBar({ keyFields, accessToken }) {
           <button onClick={updateFieldsInSalesforce} className="save-button">Save</button>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }
