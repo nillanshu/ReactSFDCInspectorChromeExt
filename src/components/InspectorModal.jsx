@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from './SearchBar';
+import UploadModal from './UploadModal';
+import { FaSearch, FaUpload } from 'react-icons/fa';
 
 export default function InspectorModal({ keyFields, error, accessToken }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [uploadModalVisible, setUploadModalVisible] = useState(false);
 
   useEffect(() => {
     console.log('Inside Inspector Modal');
@@ -18,17 +21,28 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
 
   return (
     <div>
-      <div id="help-container" onClick={() => setModalVisible(!modalVisible)}>
+      <div id="help-container">
         <div className="help-content">
-            <div>Need Help</div>
-            <div className="help-question-mark">?</div>
+          <div>Need Help</div>
+          <div className="help-question-mark">?</div>
+          <div className="icons">
+            <FaSearch className="icon" onClick={() => setModalVisible(!modalVisible)} />
+            <FaUpload className="icon" onClick={() => setUploadModalVisible(!uploadModalVisible)} />
+          </div>
         </div>
-    </div>
+      </div>
       {modalVisible && (
         <div id="modal" className="fixed-left">
           <div className="fixed-left-content">
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <SearchBar keyFields={keyFields} accessToken={accessToken} />
+          </div>
+        </div>
+      )}
+      {uploadModalVisible && (
+        <div id="upload-modal" className="fixed-left">
+          <div className="fixed-left-content">
+            <UploadModal accessToken={accessToken} />
           </div>
         </div>
       )}
