@@ -41,12 +41,12 @@
 
 #help-container {
     position: fixed;
-    top: 45%;
+    top: 0;
     left: -72px;
     transform: translateY(-50%);
     transition: left 0.3s;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 99999;
     height: 40px;
     width: auto; 
     background-color: #F38117; 
@@ -78,7 +78,7 @@
     left: 0;
 }
 
-.icons {
+/* .inspector-icons {
     display: flex;
     position: absolute;
     top: 50%;
@@ -86,34 +86,30 @@
     transform: translateY(-50%);
     opacity: 0;
     transition: opacity 0.3s, left 0.3s;
-}
+} */
 
-.icon {
+.inspector-icon {
     margin-left: 10px;
     cursor: pointer;
     color: #F38117; /* Set icon color to orange */
     font-size: 1.25rem;
 }
 
-.help-content:hover .icons {
+.help-content:hover .inspector-icons {
     opacity: 1;
     left: calc(100% + 20px); /* Adjust the distance the icons float out */
 }
 
-.slds-modal__container {
-    width: 75%;
-    max-width: 65rem;
-}
-
 .fixed-left {
     position: fixed;
-    top: 48%;
+    top: 33%;
     left: -10px;
     width: 420px;
     background-color: white;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 99999;
+    z-index: 9999;
     overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 11px;
@@ -373,53 +369,8 @@
     box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
-/* .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    max-height: 80%; 
-    overflow-y: auto;
-    overflow-x: hidden; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-}
-
-.modal-content pre {
-    max-width: 100%;
-    white-space: pre-wrap; 
-    overflow-wrap: break-word; 
-    word-break: break-all;
-}
-
-.modal-content button {
-    background-color: #F38117;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+/* .fixed-left-content button {
+    margin-bottom: 10px;
+    padding: 5px 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: sticky;
-    bottom: 0; 
-    margin-top: 10px;
-}  
-
-.modal-content button:hover {
-    background-color: #D96B0C;
-} */
+  } */

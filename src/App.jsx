@@ -4,14 +4,11 @@ import InspectorModal from './components/InspectorModal';
 import './styles/contentStyles.css';
 
 export default function App({ accessToken }) {
-  const { keyFields, error, loading } = useSalesforceSession(accessToken);
-  console.log('Inside App');
-  console.log('Key Fields:', keyFields);
-  console.log('Error:', error);
+  const { keyFields, error} = useSalesforceSession(accessToken);
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if(accessToken && (keyFields || error)) {
+    return <InspectorModal keyFields={keyFields} error={error} accessToken={accessToken} />;
   }
 
-  return <InspectorModal keyFields={keyFields} error={error} accessToken={accessToken} />;
+  return null;
 }
