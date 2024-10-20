@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { updateRecordFields } from '../api/updateFields';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SearchBar({ keyFields, accessToken }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,22 +47,22 @@ export default function SearchBar({ keyFields, accessToken }) {
 
   const updateFieldsInSalesforce = async () => {
     if (!recordId) {
-      alert('Record ID is not defined');
+      toast.error('Record ID is not defined');
       return;
     }
 
     try {
       const response = await updateRecordFields(instanceUrl, recordId, objectApiName, changes, accessToken);
       if (response.status === 204) {
-        alert('Fields updated successfully');
+        toast.success('Fields updated successfully');
         setChanges({});
         setInitialFields(JSON.parse(JSON.stringify(fields)));
       } else {
-        alert('Error updating fields');
+        toast.error('Error updating fields');
       }
     } catch (error) {
       console.error('Error updating fields:', error);
-      alert('Error updating fields');
+      toast.error('Error updating fields');
     }
   };
 
@@ -89,7 +91,7 @@ export default function SearchBar({ keyFields, accessToken }) {
     {
       name: 'Field Value',
       selector: (row, index) => (
-        <div className="cell" title={row.fieldValue} onDoubleClick={() => setEditingRowIndex(index)}>
+        <div className={`cell ${changes[row.fieldName] ? 'changed-field' : ''}`} title={row.fieldValue} onDoubleClick={() => setEditingRowIndex(index)}>
           {editingRowIndex === index ? (
             <input
               type="text"
@@ -97,14 +99,13 @@ export default function SearchBar({ keyFields, accessToken }) {
               onChange={(e) => handleFieldChange(index, row.fieldName, e.target.value)}
               onBlur={() => setEditingRowIndex(null)}
               autoFocus
-              className={changes[row.fieldName] ? 'changed-field' : ''}
             />
           ) : isSalesforceId(row.fieldValue) ? (
             <a href={`/${row.fieldValue}`} target="_blank" rel="noopener noreferrer" title={row.fieldValue}>
               {row.fieldValue}
             </a>
           ) : (
-            <span className={changes[row.fieldName] ? 'changed-field' : ''}>{row.fieldValue}</span>
+            <span>{row.fieldValue}</span>
           )}
         </div>
       ),
@@ -136,6 +137,7 @@ export default function SearchBar({ keyFields, accessToken }) {
           <button onClick={updateFieldsInSalesforce} className="save-button">Save</button>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

@@ -1,5 +1,8 @@
 .search-container {
     padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .search-input {
@@ -15,8 +18,8 @@
 }
 
 .search-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+    border-color: #F38117;
+    box-shadow: 0 2px 8px rgba(243, 129, 23, 0.25);
     outline: none;
 }
 
@@ -38,15 +41,15 @@
 
 #help-container {
     position: fixed;
-    top: 45%;
+    top: 0;
     left: -72px;
     transform: translateY(-50%);
     transition: left 0.3s;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 99999;
     height: 40px;
     width: auto; 
-    background-color: #007bff; 
+    background-color: #F38117; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,34 +63,53 @@
     white-space: nowrap;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .help-content div:first-child {
-    margin-right: 5px;
+    margin-right: 5px; /* Adjust spacing as needed */
 }
 
 .help-question-mark {
-    padding: 0 10px;
+    padding: 0 10px; /* Add padding to the left and right of the "?" */
 }
 
 #help-container:hover {
     left: 0;
 }
 
-.slds-modal__container {
-    width: 75%;
-    max-width: 65rem;
+/* .inspector-icons {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, left 0.3s;
+} */
+
+.inspector-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #F38117; /* Set icon color to orange */
+    font-size: 1.25rem;
+}
+
+.help-content:hover .inspector-icons {
+    opacity: 1;
+    left: calc(100% + 20px); /* Adjust the distance the icons float out */
 }
 
 .fixed-left {
     position: fixed;
-    top: 50%;
+    top: 33%;
     left: -10px;
     width: 420px;
     background-color: white;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 99999;
+    z-index: 9999;
     overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 11px;
@@ -100,7 +122,7 @@
     align-items: center;
     padding: 0.5rem 1rem;
     border-bottom: 1px solid #ddd;
-    background-color: #e6f0fa;
+    background-color: #FCE5D0; /* Light orange */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -127,7 +149,7 @@
 }
 
 #datatable-container th {
-    background-color: #e6f0fa;
+    background-color: #FCE5D0; /* Light orange */
     position: sticky;
     top: 0;
     z-index: 1;
@@ -140,7 +162,7 @@
 }
 
 .my-table .rdt_TableCol {
-    background-color: #c1c6f9;
+    background-color: #F38117;
     color: white;
     font-size: 0.9rem;
     font-style: italic;
@@ -155,11 +177,11 @@
 }
 
 .my-table .rdt_TableRow:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #FCE5D0; /* Light orange */
 }
 
 .my-table .rdt_TableRow:hover {
-    background-color: #ddd;
+    background-color: #FAD4B0; /* Slightly darker light orange */
 }
 
 .my-table .rdt_TableCell {
@@ -175,11 +197,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text to the left */
+    padding-left: 10px; /* Add some padding to the left */
+}
+
+.cell input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.changed-field {
+    background-color: #FCE5D0; /* Light orange */
 }
 
 .my-table .-previous button,
 .my-table .-next button {
-    background-color: #6777EF;
+    background-color: #F38117;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -189,7 +231,7 @@
 
 .my-table .-previous button:hover,
 .my-table .-next button:hover {
-    background-color: #4B5FD3;
+    background-color: #D96B0C;
 }
 
 .my-table .-previous button:disabled,
@@ -198,37 +240,137 @@
     cursor: not-allowed;
 }
 
-.changed-field {
-    background-color: #ffeb3b;
-  }
-
-.search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .cancel-button, .save-button {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+    background-color: #F38117;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .cancel-button:hover, .save-button:hover {
-  background-color: #0056b3;
+    background-color: #D96B0C;
 }
+
+.upload-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 430px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.upload-container h2 {
+    margin-bottom: 20px;
+}
+
+.select-container {
+    width: 100%;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.file-input-container {
+    margin-bottom: 20px;
+}
+
+.mapping-container {
+    width: 100%;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .mapping-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .mapping-row span {
+    flex: 1;
+  }
+  
+  .mapping-row .react-select__control {
+    flex: 2;
+  }
+
+  .upload-container button {
+    background-color: #F38117;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: auto; 
+    margin-bottom: 2px; 
+    align-self: center;
+}
+
+.upload-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.upload-container button:hover:not(:disabled) {
+    background-color: #D96B0C;
+}
+
+.react-select__menu {
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.react-select__control {
+    width: 100%;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .failed-records {
+    margin-top: 20px;
+    background-color: #f8d7da;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: auto; /* Enable horizontal scroll if content is too wide */
+    word-wrap: break-word; /* Ensure long words or URLs break */
+    white-space: pre-wrap; /* Preserve line breaks and wrap long lines */
+    max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* .fixed-left-content button {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  } */
