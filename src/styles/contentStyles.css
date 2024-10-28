@@ -3,6 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .search-input {
@@ -24,19 +27,24 @@
 }
 
 .datatable-container {
-    max-height: 300px;
+    flex-grow: 1;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-}
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); 
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+  }
 
 .datatable-container::-webkit-scrollbar {
-    width: 0; /* Safari and Chrome */
-    height: 0; /* Safari and Chrome */
+    width: 0; 
+    height: 0;
 }
 
 #help-container {
@@ -67,54 +75,58 @@
 }
 
 .help-content div:first-child {
-    margin-right: 5px; /* Adjust spacing as needed */
+    margin-right: 5px;
 }
 
 .help-question-mark {
-    padding: 0 10px; /* Add padding to the left and right of the "?" */
+    padding: 0 10px;
 }
 
 #help-container:hover {
     left: 0;
 }
 
-/* .inspector-icons {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-    opacity: 0;
-    transition: opacity 0.3s, left 0.3s;
-} */
-
 .inspector-icon {
     margin-left: 10px;
     cursor: pointer;
-    color: #F38117; /* Set icon color to orange */
+    color: #F38117;
     font-size: 1.25rem;
 }
 
 .help-content:hover .inspector-icons {
     opacity: 1;
-    left: calc(100% + 20px); /* Adjust the distance the icons float out */
+    left: calc(100% + 20px);
 }
 
 .fixed-left {
     position: fixed;
     top: 33%;
     left: -10px;
-    width: 420px;
+    width: 28.5rem;
+    height: 28.5rem;
     background-color: white;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 9999;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     padding: 0;
-}
+    resize: both; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .resize-handle {
+    width: 1.25rem; 
+    height: 1.25rem; 
+    background-color: #ddd;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: se-resize;
+  }
 
 .fixed-left-header {
     display: flex;
@@ -122,7 +134,7 @@
     align-items: center;
     padding: 0.5rem 1rem;
     border-bottom: 1px solid #ddd;
-    background-color: #FCE5D0; /* Light orange */
+    background-color: #FCE5D0; 
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -134,31 +146,20 @@
 
 .fixed-left-content {
     padding: 0.5rem 1rem;
-}
-
-#datatable-container table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#datatable-container th, #datatable-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-    width: 50%;
-}
-
-#datatable-container th {
-    background-color: #FCE5D0; /* Light orange */
-    position: sticky;
-    top: 0;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    /* min-height: 26.86rem; */
+    overflow: auto;
 }
 
 .my-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    height: 100%;
+    table-layout: auto;
 }
 
 .my-table .rdt_TableCol {
@@ -171,21 +172,24 @@
 
 .my-table .rdt_TableRow {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 0.5rem;
     font-size: 0.8rem;
     font-style: normal;
 }
 
 .my-table .rdt_TableRow:nth-child(even) {
-    background-color: #FCE5D0; /* Light orange */
+    background-color: #FCE5D0; 
 }
 
 .my-table .rdt_TableRow:hover {
-    background-color: #FAD4B0; /* Slightly darker light orange */
+    background-color: #FAD4B0; 
 }
 
 .my-table .rdt_TableCell {
-    padding: 12px 15px;
+    padding: 0.75rem 0.9375rem;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
 }
 
 .my-table .clickable {
@@ -196,27 +200,26 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align text to the left */
-    padding-left: 10px; /* Add some padding to the left */
+    justify-content: flex-start;
+    padding-left: 0.625rem;
 }
 
 .cell input {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 0.3125rem; 
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 0.25rem;
 }
 
 .changed-field {
-    background-color: #FCE5D0; /* Light orange */
+    background-color: #FCE5D0;
 }
 
 .my-table .-previous button,
@@ -224,8 +227,8 @@
     background-color: #F38117;
     color: white;
     border: none;
-    padding: 5px 10px;
-    margin: 0 5px;
+    padding: 0.3125rem 0.625rem; 
+    margin: 0 0.3125rem;
     cursor: pointer;
 }
 
@@ -271,8 +274,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 400px;
-    height: 430px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -354,23 +357,38 @@
     margin-top: 10px;
   }
   
-  .failed-records {
+.failed-records {
     margin-top: 20px;
     background-color: #f8d7da;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #f5c6cb;
     border-radius: 5px;
     max-height: 150px;
     overflow-y: auto;
-    overflow-x: auto; /* Enable horizontal scroll if content is too wide */
-    word-wrap: break-word; /* Ensure long words or URLs break */
-    white-space: pre-wrap; /* Preserve line breaks and wrap long lines */
-    max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
-    box-sizing: border-box; /* Ensure padding is included in width calculations */
+    overflow-x: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-/* .fixed-left-content button {
-    margin-bottom: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  } */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .loading-container {
+    text-align: center;
+  }
+
+  .job-status {
+    margin-top: 10px;
+  }
