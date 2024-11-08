@@ -12,14 +12,30 @@ function handleTabChange() {
         console.error('Error getting session cookie:', response.error);
         return;
       }
-      injectReactApp(response.accessToken);
+
+      const accessToken = response.accessToken;
+      const url = window.location.href;
+      const instanceUrl = url.includes('sandbox')
+      ? url.replace(/\.sandbox\..*$/, '.sandbox.my.salesforce.com')
+      : url.replace(/\.develop\..*$/, '.develop.my.salesforce.com');
+
+      chrome.runtime.sendMessage(
+        { action: 'getUserId', instanceUrl, accessToken },
+        (userIdResponse) => {
+          if (userIdResponse.error) {
+            console.error('Error getting user ID:', userIdResponse.error);
+            return;
+          }
+          injectReactApp(accessToken, userIdResponse.userId);
+        }
+      );
     });
   } else {
     removeReactApp();
   }
 }
 
-function injectReactApp(accessToken) {
+function injectReactApp(accessToken, userId) {
   if (document.getElementById('key-fields-inspector')) {
     return;
   }
@@ -32,7 +48,7 @@ function injectReactApp(accessToken) {
   document.body.appendChild(inspectorDiv);
   
   const root = createRoot(inspectorDiv);
-  root.render(<App accessToken={accessToken} />);
+  root.render(<App accessToken={accessToken} userId={userId} />);
 }
 
 function removeReactApp() {

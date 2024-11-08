@@ -392,3 +392,44 @@
   .job-status {
     margin-top: 10px;
   }
+
+  /* Styling Anonymous Window */
+  .anonymous-window {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  .result-container, .logs-container {
+    margin-top: 20px;
+  }
+  
+  textarea {
+    width: auto;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #eb8e37;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #F38117;
+  }

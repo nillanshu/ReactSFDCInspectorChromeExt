@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import UploadModal from './UploadModal';
-import { FaSearch, FaUpload } from 'react-icons/fa';
+import AnonymousWindow from '../pages/AnonymousWindow';
+import { FaSearch, FaUpload, FaCode } from 'react-icons/fa';
 
-export default function InspectorModal({ keyFields, error, accessToken }) {
+export default function InspectorModal({ keyFields, error, accessToken, userId }) {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
   const [currentModalContent, setCurrentModalContent] = useState(null);
   const helpContainerRef = useRef(null);
@@ -16,12 +17,23 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
   const startHeight = useRef(0);
   const startX = useRef(0);
   const startYResize = useRef(0);
+  const [instanceUrl, setInstanceUrl] = useState('');
 
   useEffect(() => {
     const initialTranslateY = window.innerHeight * 0.3;
     helpContainerRef.current.style.transform = `translateY(${initialTranslateY}px)`;
     startTranslateY.current = initialTranslateY;
   }, []);
+
+  useEffect(() => {
+    const url = window.location.href;
+    setInstanceUrl(
+      url.includes('sandbox')
+        ? url.replace(/\.sandbox\..*$/, '.sandbox.my.salesforce.com')
+        : url.replace(/\.develop\..*$/, '.develop.my.salesforce.com')
+    );
+
+  }, [instanceUrl, accessToken]);
 
   const handleMenuModalVisible = () => {
     setMenuModalVisible(!menuModalVisible);
@@ -120,6 +132,7 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
             <div className="inspector-icons">
               <FaSearch className="inspector-icon" onClick={() => handleOpenModal('search')} />
               <FaUpload className="inspector-icon" onClick={() => handleOpenModal('upload')} />
+              <FaCode className="inspector-icon" onClick={() => handleOpenModal('code')} />
             </div>
             {currentModalContent === 'search' && (
               <>
@@ -129,6 +142,9 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
             )}
             {currentModalContent === 'upload' && (
               <UploadModal accessToken={accessToken} />
+            )}
+            {currentModalContent === 'code' && (
+              <AnonymousWindow accessToken={accessToken} instanceUrl={instanceUrl} userId={userId} />
             )}
           </div>
           <div className="resize-handle" onMouseDown={handleResizeMouseDown}></div>
@@ -142,4 +158,5 @@ InspectorModal.propTypes = {
   keyFields: PropTypes.array.isRequired,
   error: PropTypes.string,
   accessToken: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 };
