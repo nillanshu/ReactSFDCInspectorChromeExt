@@ -21,7 +21,7 @@ export default function InspectorModal({ keyFields, error, accessToken, userId }
   const [instanceUrl, setInstanceUrl] = useState('');
 
   useEffect(() => {
-    const initialTranslateY = window.innerHeight * 0.3;
+    const initialTranslateY = window.innerHeight * 0.15;
     helpContainerRef.current.style.transform = `translateY(${initialTranslateY}px)`;
     startTranslateY.current = initialTranslateY;
   }, []);
