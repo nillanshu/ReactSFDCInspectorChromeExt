@@ -100,10 +100,10 @@
 
 .fixed-left {
     position: fixed;
-    top: 33%;
+    top: 20%;
     left: -10px;
     width: 45rem;
-    height: 28.5rem;
+    height: 24rem;
     background-color: white;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 9999;
