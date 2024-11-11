@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import SearchBar from './SearchBar';
-import UploadModal from './UploadModal';
+import SearchBar from '../pages/SearchBar';
+import UploadModal from '../pages/UploadModal';
 import AnonymousWindow from '../pages/AnonymousWindow';
-import { FaSearch, FaUpload, FaCode } from 'react-icons/fa';
+import FieldCreator from '../pages/FieldCreator';
+import { FaSearch, FaUpload, FaCode, FaPlus } from 'react-icons/fa';
 
 export default function InspectorModal({ keyFields, error, accessToken, userId }) {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
@@ -133,6 +134,7 @@ export default function InspectorModal({ keyFields, error, accessToken, userId }
               <FaSearch className="inspector-icon" onClick={() => handleOpenModal('search')} />
               <FaUpload className="inspector-icon" onClick={() => handleOpenModal('upload')} />
               <FaCode className="inspector-icon" onClick={() => handleOpenModal('code')} />
+              <FaPlus className="inspector-icon" onClick={() => handleOpenModal('bulkField')} />
             </div>
             {currentModalContent === 'search' && (
               <>
@@ -145,6 +147,9 @@ export default function InspectorModal({ keyFields, error, accessToken, userId }
             )}
             {currentModalContent === 'code' && (
               <AnonymousWindow accessToken={accessToken} instanceUrl={instanceUrl} userId={userId} />
+            )}
+            {currentModalContent === 'bulkField' && (
+              <FieldCreator accessToken={accessToken} instanceUrl={instanceUrl} />
             )}
           </div>
           <div className="resize-handle" onMouseDown={handleResizeMouseDown}></div>

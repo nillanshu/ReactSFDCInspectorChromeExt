@@ -41,4 +41,47 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     return true; // Will respond asynchronously
   }
+
+  if (request.action === 'deployFields') {
+    (async () => {
+      try {
+        const response = await fetch(request.endpointUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/xml',
+            'SOAPAction': 'Create',
+          },
+          body: request.soapBody,
+        });
+        const responseText = await response.text();
+        sendResponse({ success: true, response: responseText });
+      } catch (error) {
+        sendResponse({ success: false, error: error.message });
+      }
+    })();
+
+    return true; // Will respond asynchronously
+  }
+
+  if (request.action === 'deployFieldPermissions') {
+    const { endpointUrl, soapBody } = request;
+
+    fetch(endpointUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/xml',
+        'SOAPAction': 'Create',
+      },
+      body: soapBody,
+    })
+    .then(response => response.text())
+    .then(responseText => {
+      sendResponse({ success: true, response: responseText });
+    })
+    .catch(error => {
+      sendResponse({ success: false, error: error.message });
+    });
+
+    return true; // Will respond asynchronously.
+  }
 });

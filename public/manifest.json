@@ -20,7 +20,7 @@
     {
       "matches": ["https://*.lightning.force.com/*"],
       "js": ["contentScript.js"],
-      "css": ["assets/contentScript-DtjiDe-N.css"]
+      "css": ["assets/contentScript-DsX6Trda.css"]
     }
   ],
   "icons": {
