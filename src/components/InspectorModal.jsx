@@ -1,22 +1,40 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import SearchBar from './SearchBar';
-import UploadModal from './UploadModal';
-import { FaSearch, FaUpload } from 'react-icons/fa';
+import SearchBar from '../pages/SearchBar';
+import UploadModal from '../pages/UploadModal';
+import AnonymousWindow from '../pages/AnonymousWindow';
+import FieldCreator from '../pages/FieldCreator';
+import { FaSearch, FaUpload, FaCode, FaPlus } from 'react-icons/fa';
 
-export default function InspectorModal({ keyFields, error, accessToken }) {
+export default function InspectorModal({ keyFields, error, accessToken, userId }) {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
   const [currentModalContent, setCurrentModalContent] = useState(null);
   const helpContainerRef = useRef(null);
   const isDragging = useRef(false);
   const startY = useRef(0);
   const startTranslateY = useRef(0);
+  const isResizing = useRef(false);
+  const startWidth = useRef(0);
+  const startHeight = useRef(0);
+  const startX = useRef(0);
+  const startYResize = useRef(0);
+  const [instanceUrl, setInstanceUrl] = useState('');
 
   useEffect(() => {
     const initialTranslateY = window.innerHeight * 0.3;
     helpContainerRef.current.style.transform = `translateY(${initialTranslateY}px)`;
     startTranslateY.current = initialTranslateY;
   }, []);
+
+  useEffect(() => {
+    const url = window.location.href;
+    setInstanceUrl(
+      url.includes('sandbox')
+        ? url.replace(/\.sandbox\..*$/, '.sandbox.my.salesforce.com')
+        : url.replace(/\.develop\..*$/, '.develop.my.salesforce.com')
+    );
+
+  }, [instanceUrl, accessToken]);
 
   const handleMenuModalVisible = () => {
     setMenuModalVisible(!menuModalVisible);
@@ -62,6 +80,36 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
     document.removeEventListener('mouseup', handleMouseUp);
   };
 
+  const handleResizeMouseDown = (e) => {
+    e.preventDefault();
+    isResizing.current = true;
+
+    startWidth.current = helpContainerRef.current.offsetWidth;
+    startHeight.current = helpContainerRef.current.offsetHeight;
+    startX.current = e.clientX;
+    startYResize.current = e.clientY;
+
+    document.addEventListener('mousemove', handleResizeMouseMove);
+    document.addEventListener('mouseup', handleResizeMouseUp);
+  };
+
+  const handleResizeMouseMove = (e) => {
+    if (isResizing.current) {
+      const newWidth = startWidth.current + (e.clientX - startX.current);
+      const newHeight = startHeight.current + (e.clientY - startYResize.current);
+
+      helpContainerRef.current.style.width = `${newWidth}px`;
+      helpContainerRef.current.style.height = `${newHeight}px`;
+    }
+  };
+
+  const handleResizeMouseUp = () => {
+    isResizing.current = false;
+
+    document.removeEventListener('mousemove', handleResizeMouseMove);
+    document.removeEventListener('mouseup', handleResizeMouseUp);
+  };
+
   return (
     <div>
       <div
@@ -85,6 +133,8 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
             <div className="inspector-icons">
               <FaSearch className="inspector-icon" onClick={() => handleOpenModal('search')} />
               <FaUpload className="inspector-icon" onClick={() => handleOpenModal('upload')} />
+              <FaCode className="inspector-icon" onClick={() => handleOpenModal('code')} />
+              <FaPlus className="inspector-icon" onClick={() => handleOpenModal('bulkField')} />
             </div>
             {currentModalContent === 'search' && (
               <>
@@ -95,7 +145,14 @@ export default function InspectorModal({ keyFields, error, accessToken }) {
             {currentModalContent === 'upload' && (
               <UploadModal accessToken={accessToken} />
             )}
+            {currentModalContent === 'code' && (
+              <AnonymousWindow accessToken={accessToken} instanceUrl={instanceUrl} userId={userId} />
+            )}
+            {currentModalContent === 'bulkField' && (
+              <FieldCreator accessToken={accessToken} instanceUrl={instanceUrl} />
+            )}
           </div>
+          <div className="resize-handle" onMouseDown={handleResizeMouseDown}></div>
         </div>
       )}
     </div>
@@ -106,4 +163,5 @@ InspectorModal.propTypes = {
   keyFields: PropTypes.array.isRequired,
   error: PropTypes.string,
   accessToken: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 };

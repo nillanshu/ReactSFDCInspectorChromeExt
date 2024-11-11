@@ -127,7 +127,6 @@ export default function SearchBar({ keyFields, accessToken }) {
           columns={columns}
           data={filteredFields}
           fixedHeader
-          fixedHeaderScrollHeight="300px"
           className="my-table"
         />
       </div>
