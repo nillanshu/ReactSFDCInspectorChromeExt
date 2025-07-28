@@ -138,18 +138,44 @@ export default function InspectorModal({ keyFields, error, accessToken, userId }
             </div>
             {currentModalContent === 'search' && (
               <>
+                {!accessToken && (
+                  <div style={{ color: 'orange', padding: '10px', background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '4px', marginBottom: '10px' }}>
+                    <strong>Warning:</strong> No active Salesforce session detected. Please ensure you are logged into Salesforce and refresh the page.
+                  </div>
+                )}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <SearchBar keyFields={keyFields} accessToken={accessToken} />
               </>
             )}
             {currentModalContent === 'upload' && (
-              <UploadModal accessToken={accessToken} />
+              <>
+                {!accessToken && (
+                  <div style={{ color: 'orange', padding: '10px', background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '4px', marginBottom: '10px' }}>
+                    <strong>Warning:</strong> No active Salesforce session detected. This feature requires a valid session.
+                  </div>
+                )}
+                <UploadModal accessToken={accessToken} />
+              </>
             )}
             {currentModalContent === 'code' && (
-              <AnonymousWindow accessToken={accessToken} instanceUrl={instanceUrl} userId={userId} />
+              <>
+                {!accessToken && (
+                  <div style={{ color: 'orange', padding: '10px', background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '4px', marginBottom: '10px' }}>
+                    <strong>Warning:</strong> No active Salesforce session detected. This feature requires a valid session.
+                  </div>
+                )}
+                <AnonymousWindow accessToken={accessToken} instanceUrl={instanceUrl} userId={userId} />
+              </>
             )}
             {currentModalContent === 'bulkField' && (
-              <FieldCreator accessToken={accessToken} instanceUrl={instanceUrl} />
+              <>
+                {!accessToken && (
+                  <div style={{ color: 'orange', padding: '10px', background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '4px', marginBottom: '10px' }}>
+                    <strong>Warning:</strong> No active Salesforce session detected. This feature requires a valid session.
+                  </div>
+                )}
+                <FieldCreator accessToken={accessToken} instanceUrl={instanceUrl} />
+              </>
             )}
           </div>
           <div className="resize-handle" onMouseDown={handleResizeMouseDown}></div>

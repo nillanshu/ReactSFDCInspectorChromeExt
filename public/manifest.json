@@ -18,7 +18,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.lightning.force.com/*"],
+      "matches": [
+        "https://*.lightning.force.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*"
+      ],
       "js": ["contentScript.js"],
       "css": ["assets/contentScript-CJSKq5BE.css"]
     }
